@@ -1,0 +1,404 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    background: #050b18;
+    color: white;
+}
+
+
+
+/* NAVIGATION */
+
+nav {
+
+    position: sticky;
+    top: 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 15px 25px;
+
+    background: #020611;
+
+    border-bottom: 1px solid #00ff99;
+
+    z-index: 1000;
+}
+
+
+
+nav h2 {
+
+    color: #00ff99;
+
+}
+
+
+
+nav ul {
+
+    display: flex;
+    list-style: none;
+    gap: 15px;
+
+}
+
+
+
+nav a {
+
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+
+}
+
+
+
+nav a:hover {
+
+    color: #00ff99;
+
+}
+
+
+
+
+
+
+/* HERO */
+
+
+.hero {
+
+    min-height: 80vh;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 30px;
+
+    background:
+    linear-gradient(
+    135deg,
+    #001f3f,
+    #050b18
+    );
+
+}
+
+
+
+.hero h1 {
+
+    font-size: 45px;
+
+    color: #00ff99;
+
+    text-shadow:
+    0 0 15px #00ff99;
+
+}
+
+
+
+.hero p {
+
+    max-width: 600px;
+
+    margin: 20px;
+
+    color: #ddd;
+
+    line-height: 1.7;
+
+}
+
+
+
+
+
+
+
+/* BUTTONS */
+
+
+button {
+
+    background: #00ff99;
+
+    color: #001;
+
+    border: none;
+
+    padding: 13px 28px;
+
+    border-radius: 30px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+
+}
+
+
+
+button:hover {
+
+    transform: scale(1.08);
+
+    box-shadow:
+    0 0 20px #00ff99;
+
+}
+
+
+
+
+
+
+
+/* SECTIONS */
+
+
+section {
+
+    margin: 30px 15px;
+
+    padding: 30px;
+
+    background: #0b1628;
+
+    border-radius: 15px;
+
+    border: 1px solid #16365c;
+
+    animation: appear 1s ease;
+
+}
+
+
+
+section h2 {
+
+    text-align: center;
+
+    color: #00ff99;
+
+    margin-bottom: 20px;
+
+}
+
+
+
+section p {
+
+    text-align: center;
+
+    line-height: 1.8;
+
+    color: #ddd;
+
+}
+
+
+
+
+
+
+
+/* CARDS */
+
+
+.card {
+
+    margin-top: 20px;
+
+    padding: 20px;
+
+    background: #07101f;
+
+    border-radius: 15px;
+
+    border: 1px solid #21466d;
+
+}
+
+
+
+.card h3 {
+
+    color: #00ff99;
+
+    text-align: center;
+
+    margin-bottom: 15px;
+
+}
+
+
+
+
+
+
+/* INPUTS */
+
+
+input {
+
+    width: 100%;
+
+    padding: 14px;
+
+    margin: 10px 0;
+
+    border-radius: 10px;
+
+    border: none;
+
+    outline: none;
+
+}
+
+
+
+
+
+
+
+/* ADMIN PROFILE */
+
+
+#admin h3 {
+
+    text-align: center;
+
+    font-size: 25px;
+
+    color: white;
+
+    margin-bottom: 15px;
+
+}
+
+
+
+
+
+
+
+/* FOOTER */
+
+
+footer {
+
+    text-align: center;
+
+    padding: 25px;
+
+    background: #020611;
+
+    color: #aaa;
+
+}
+
+
+
+
+
+
+
+/* ANIMATION */
+
+
+@keyframes appear {
+
+
+from {
+
+opacity:0;
+
+transform: translateY(30px);
+
+}
+
+
+to {
+
+opacity:1;
+
+transform: translateY(0);
+
+}
+
+
+}
+
+
+
+
+
+
+
+/* MOBILE */
+
+
+@media(max-width:700px){
+
+
+nav {
+
+    flex-direction: column;
+
+}
+
+
+
+nav ul {
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    margin-top: 10px;
+
+}
+
+
+
+.hero h1 {
+
+    font-size: 32px;
+
+}
+
+
+
+section {
+
+    padding: 20px;
+
+}
+
+
+}

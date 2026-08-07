@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CyberGuard | Tools</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<nav>
+
+    <h2>🛡️ CyberGuard</h2>
+
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="password.html">Password Test</a></li>
+        <li><a href="tools.html">Tools</a></li>
+        <li><a href="tips.html">Tips</a></li>
+        <li><a href="admin.html">Admin</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+</nav>
+
+
+<section class="hero">
+
+    <h1>🛠️ CyberGuard Tools</h1>
+
+    <p>
+        Simple tools designed to help you
+        improve your digital security.
+    </p>
+
+</section>
+
+
+<section>
+
+    <div class="card">
+
+        <h3>🔐 Password Generator</h3>
+
+        <p>
+            Generate a random strong password.
+        </p>
+
+        <button onclick="generatePassword()">
+            Generate Password
+        </button>
+
+        <p id="generated"></p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>📋 Security Checklist</h3>
+
+        <p>
+            Check some basic security practices.
+        </p>
+
+        <label>
+            <input type="checkbox">
+            Use strong passwords
+        </label>
+
+        <br><br>
+
+        <label>
+            <input type="checkbox">
+            Enable two-factor authentication
+        </label>
+
+        <br><br>
+
+        <label>
+            <input type="checkbox">
+            Keep your devices updated
+        </label>
+
+        <br><br>
+
+        <label>
+            <input type="checkbox">
+            Avoid suspicious links
+        </label>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>🌐 URL Safety Check</h3>
+
+        <p>
+            Check the basic format of a website link.
+        </p>
+
+        <input
+            type="text"
+            id="url"
+            placeholder="https://example.com">
+
+        <button onclick="checkURL()">
+            Check URL
+        </button>
+
+        <p id="urlResult"></p>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <p>
+        © 2026 CyberGuard | Created by Leonel
+    </p>
+
+</footer>
+
+
+<script src="js/script.js"></script>
+
+</body>
+
+</html>
