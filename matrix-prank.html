@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#020704">
+<title>LEONEL OFFICIEL | Matrix Simulation</title>
+<style>
+:root{--green:#35ff78;--red:#ff394d;--dim:#8ab99a;--bg:#020704}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--green);font-family:Consolas,"Courier New",monospace;min-height:100vh;overflow-x:hidden}
+canvas{position:fixed;inset:0;width:100%;height:100%;opacity:.22;z-index:0;pointer-events:none}
+main{position:relative;z-index:1;width:min(920px,94vw);margin:0 auto;padding:22px 0 36px}
+header{border:1px solid #1c6938;background:#04120bd9;padding:16px;border-radius:10px;box-shadow:0 0 24px #00ff3320}
+.brand{font-size:clamp(20px,5vw,32px);font-weight:bold;text-shadow:0 0 12px #20ff6a}
+.sub{color:var(--dim);font-size:12px;letter-spacing:2px;margin-top:8px}
+.status{display:flex;gap:8px;align-items:center;margin-top:14px;font-size:12px;flex-wrap:wrap}
+.dot{width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 10px var(--green)}
+.pill{border:1px solid #236a3b;padding:5px 8px;border-radius:20px}
+.panel{margin-top:16px;border:1px solid #1b5631;background:#020805eF;border-radius:10px;overflow:hidden}
+.panelhead{padding:10px 13px;background:#0a1b10;border-bottom:1px solid #1b5631;display:flex;justify-content:space-between;gap:8px;font-size:12px}
+#terminal{height:min(48vh,430px);min-height:270px;overflow:auto;padding:14px;font-size:12px;line-height:1.65;overflow-wrap:anywhere}
+.line{white-space:pre-wrap}.muted{color:#8ab99a}.red{color:var(--red);text-shadow:0 0 8px #ff394d66}.bright{color:#eaffef}
+.controls{display:flex;gap:10px;flex-wrap:wrap;padding:14px}
+button{font:inherit;font-weight:bold;padding:12px 14px;border-radius:7px;border:1px solid var(--green);background:#063217;color:#dffff0;cursor:pointer}
+button:focus-visible{outline:2px solid white;outline-offset:3px}
+button.secondary{border-color:#52745b;background:#101b13}
+button:disabled{opacity:.45;cursor:not-allowed}
+.disclaimer{color:#b5c9bb;font:12px/1.6 system-ui,sans-serif;padding:0 14px 14px}
+.reveal{display:none;margin-top:16px;padding:20px;border:1px solid var(--red);border-radius:10px;background:#21070bd9;text-align:center;color:#fff}
+.reveal h2{margin:0 0 10px;color:#ff6573}
+.reveal p{line-height:1.6}
+footer{text-align:center;color:#7da98a;font-size:11px;margin-top:16px}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<canvas id="rain" aria-hidden="true"></canvas>
+<main>
+<header>
+  <div class="brand">LEONEL OFFICIEL<span style="color:#fff">_</span></div>
+  <div class="sub">MATRIX CONSOLE // VISUAL SIMULATION</div>
+  <div class="status"><span class="dot"></span><span>SYSTEM ONLINE</span><span class="pill">LOCAL VISUAL DEMO</span><span class="pill">NO DEVICE ACCESS</span></div>
+</header>
+<section class="panel" aria-label="Terminal simulé">
+  <div class="panelhead"><span>guest@matrix: ~</span><span id="clock">--:--:--</span></div>
+  <div id="terminal" role="log" aria-live="polite"><div class="line muted">Initialisation de la simulation...</div></div>
+  <div class="controls">
+    <button id="start">▶ LANCER LA SIMULATION</button>
+    <button id="stop" class="secondary" disabled>■ ARRÊTER</button>
+    <button id="reveal" class="secondary">RÉVÉLER LA BLAGUE</button>
+  </div>
+  <div class="disclaimer">Effet visuel fictif : cette page ne scanne pas l'appareil, ne collecte aucune donnée et n'effectue aucune connexion à distance.</div>
+</section>
+<section class="reveal" id="revealBox">
+  <h2>🤣 TU T'ES FAIT AVOIR !</h2>
+  <p>Ce n'était pas un virus, juste une animation Matrix créée par Leonel Officiel.<br>Ton téléphone n'a pas été piraté 😎</p>
+  <button id="again">REJOUER L'ANIMATION</button>
+</section>
+<footer>LEARN • PRACTICE • DEFEND — Simulation éducative inoffensive</footer>
+</main>
+<script>
+(() => {
+ const terminal=document.getElementById('terminal');
+ const start=document.getElementById('start');
+ const stop=document.getElementById('stop');
+ const reveal=document.getElementById('reveal');
+ const revealBox=document.getElementById('revealBox');
+ const lines=[
+  ['[ OK ]','Initialisation du terminal visuel...'],
+  ['[ OK ]','Chargement du thème MATRIX_GREEN'],
+  ['[ INFO ]','Connexion réseau : non utilisée par cette démo'],
+  ['[ SIMULATION ]','Analyse fictive en cours...'],
+  ['[ SIMULATION ]','0 appareils analysés — aucun scan réel effectué'],
+  ['[ WARNING ]','ALERTE VISUELLE : scénario de démonstration'],
+  ['[ OK ]','Génération des caractères numériques...'],
+  ['[ SIMULATION ]','Décryptage fictif : 12%'],
+  ['[ SIMULATION ]','Décryptage fictif : 47%'],
+  ['[ SIMULATION ]','Décryptage fictif : 83%'],
+  ['[ OK ]','Séquence visuelle prête'],
+  ['[ INFO ]','Astuce : appuie sur « Révéler la blague » pour terminer']
+ ];
+ let timer=null,index=0;
+ function addLine(tag,msg){
+   const d=document.createElement('div'); d.className='line';
+   if(tag.includes('WARNING')) d.classList.add('red');
+   else if(tag.includes('SIMULATION')) d.classList.add('bright');
+   else d.classList.add('muted');
+   d.textContent=tag+' '+msg; terminal.appendChild(d);
+   terminal.scrollTop=terminal.scrollHeight;
+   while(terminal.children.length>80) terminal.removeChild(terminal.firstChild);
+ }
+ function run(){
+   clearInterval(timer); timer=null; index=0; terminal.textContent='';
+   revealBox.style.display='none'; start.disabled=true; stop.disabled=false;
+   addLine('[ SYSTEM ]','Démo Matrix démarrée. Aucun accès à l’appareil.');
+   timer=setInterval(()=>{
+     if(index>=lines.length){clearInterval(timer);timer=null;start.disabled=false;stop.disabled=true;addLine('[ FIN ]','Simulation terminée. Révèle la blague quand tu veux.');return}
+     addLine(lines[index][0],lines[index][1]);index++;
+   },850);
+ }
+ function halt(){clearInterval(timer);timer=null;start.disabled=false;stop.disabled=true;addLine('[ STOP ]','Animation arrêtée par l’utilisateur.')}
+ start.addEventListener('click',run);
+ stop.addEventListener('click',halt);
+ reveal.addEventListener('click',()=>{halt();revealBox.style.display='block';revealBox.scrollIntoView({behavior:'smooth',block:'center'});});
+ document.getElementById('again').addEventListener('click',run);
+ function clock(){document.getElementById('clock').textContent=new Date().toLocaleTimeString('fr-FR',{hour12:false})}
+ clock();setInterval(clock,1000);
+ // Decorative Matrix rain, no network access.
+ const canvas=document.getElementById('rain'),ctx=canvas.getContext('2d');
+ const chars='01アイウエオカキクケコ';
+ let drops=[],w=0,h=0,raf;
+ function resize(){const dpr=Math.min(devicePixelRatio||1,2);w=innerWidth;h=innerHeight;canvas.width=w*dpr;canvas.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);drops=Array(Math.ceil(w/16)).fill(0).map(()=>Math.random()*-30)}
+ function draw(){ctx.fillStyle='rgba(2,7,4,.12)';ctx.fillRect(0,0,w,h);ctx.fillStyle='#35ff78';ctx.font='14px monospace';for(let i=0;i<drops.length;i++){ctx.fillText(chars[Math.floor(Math.random()*chars.length)],i*16,drops[i]*16);if(drops[i]*16>h&&Math.random()>.975)drops[i]=0;drops[i]++}raf=requestAnimationFrame(draw)}
+ addEventListener('resize',resize);resize();draw();
+})();
+</script>
+</body>
+</html>
