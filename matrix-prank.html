@@ -3,67 +3,49 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LEONEL OFFICIEL | Matrix Prank</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LEONEL OFFICIEL Matrix Prank</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#020805;color:#00ff66;font-family:monospace;text-align:center}
-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:-1}
-main{max-width:650px;margin:8vh auto;padding:25px;background:#00170eeF;border:1px solid #00ff66;border-radius:12px}
-h1{font-size:clamp(24px,6vw,38px);text-shadow:0 0 12px #00ff66}
-p{line-height:1.6}
-button{background:#00ff66;color:#001008;border:0;border-radius:5px;padding:14px;margin:8px;font-weight:bold;cursor:pointer}
-#reveal{display:none;color:white;font-size:22px;margin-top:20px}
-.small{font-size:12px;color:#9affb8}
+body{margin:0;background:#020805;color:#00ff66;font-family:monospace}
+main{padding:24px;max-width:650px;margin:25px auto;border:1px solid #087c39;border-radius:14px;background:#03130b}
+h1{text-shadow:0 0 12px #00ff66}
+pre{white-space:pre-wrap;line-height:1.8;color:#ff455d}
+button{padding:14px;background:#003b20;color:#9affb9;border:1px solid #00ff66;border-radius:8px;margin:6px}
+#friend,#owner{display:none}
 </style>
 </head>
 <body>
-<canvas id="matrix"></canvas>
 <main>
+<section id="friend">
+<h1>⚠ SYSTEM ERROR</h1>
+<h2>CRITICAL SECURITY ALERT</h2>
+<pre>
+[ERROR] SYSTEM FAILURE
+[ERROR] UNKNOWN CONNECTION
+[WARNING] MATRIX BREACH DETECTED
+[ERROR] SIMULATION IN PROGRESS
+[ERROR] ACCESS DENIED
+</pre>
+<p>⚠️ Simulation fictive — aucun accès réel à ton appareil</p>
+<button onclick="document.getElementById('reveal').hidden=false">VÉRIFIER</button>
+<p id="reveal" hidden>😂 SURPRISE ! C'est une blague de LEONEL OFFICIEL</p>
+</section>
+
+<section id="owner">
 <h1>LEONEL OFFICIEL</h1>
-<p>█ MATRIX ACCESS TERMINAL █</p>
-<p id="status">Initialisation de la simulation visuelle...</p>
-<button id="start">LANCER LA SIMULATION</button>
-<button id="joke">RÉVÉLER LA BLAGUE</button>
-<div id="reveal">
-😂 TU AS ÉTÉ MATRIXÉ ! 😂
-<p>C'est une blague de Leonel Officiel 🤣</p>
-<p>Aucun piratage réel. Ton téléphone est tranquille !</p>
-</div>
-<p class="small">SIMULATION VISUELLE UNIQUEMENT · NO DEVICE ACCESS</p>
+<p>MATRIX CONSOLE // VISUAL SIMULATION</p>
+<p>🟢 SYSTEM ONLINE — NO DEVICE ACCESS</p>
+<pre id="log">[SYSTEM] Console propriétaire chargée
+[OK] Simulation visuelle prête
+[INFO] Aucun scan réel effectué</pre>
+<button onclick="document.getElementById('log').textContent+='\\n[SIMULATION] Animation lancée'">LANCER LA SIMULATION</button>
+<button onclick="document.getElementById('log').textContent+='\\n[STOP] Simulation arrêtée'">ARRÊTER</button>
+</section>
 </main>
 <script>
-const canvas=document.getElementById('matrix');
-const ctx=canvas.getContext('2d');
-let cols=[],size=16;
-function resize(){
- canvas.width=innerWidth;
- canvas.height=innerHeight;
- cols=Array(Math.ceil(canvas.width/size)).fill(0);
-}
-function draw(){
- ctx.fillStyle='rgba(0,0,0,.09)';
- ctx.fillRect(0,0,canvas.width,canvas.height);
- ctx.fillStyle='#00ff66';
- ctx.font=size+'px monospace';
- cols.forEach((y,i)=>{
-  ctx.fillText(Math.random()>0.5?'1':'0',i*size,y*size);
-  if(y*size>canvas.height&&Math.random()>.97)cols[i]=0;
-  cols[i]++;
- });
- requestAnimationFrame(draw);
-}
-addEventListener('resize',resize);
-resize();draw();
-
-document.getElementById('start').onclick=()=>{
- document.getElementById('status').textContent=
- 'SIMULATION ACTIVE — Analyse visuelle fictive...';
-};
-document.getElementById('joke').onclick=()=>{
- document.getElementById('reveal').style.display='block';
- document.getElementById('status').textContent='Simulation terminée';
-};
+const mode=new URLSearchParams(location.search).get('mode');
+document.getElementById(mode==='owner'?'owner':'friend').style.display='block';
 </script>
 </body>
 </html>
